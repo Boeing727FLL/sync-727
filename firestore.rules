@@ -1,0 +1,83 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Allow read/write to all collections since the app uses its own passcode-based authentication.
+    // In a production environment, you should restrict this using Firebase Auth.
+    
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+    
+    match /app_config/{docId} {
+      allow read, write: if true;
+    }
+    
+    match /app_passwords/{docId} {
+      allow read, write: if true;
+    }
+    
+    match /experts/{expertId} {
+      allow read, write: if true;
+      
+      match /messages/{messageId} {
+        allow read, write: if true;
+      }
+      match /files/{fileId} {
+        allow read, write: if true;
+      }
+      match /push_subscriptions/{subId} {
+        allow read, write: if true;
+      }
+    }
+
+    match /tasks/{taskId} {
+      allow read, write: if true;
+    }
+    
+    match /sprint_tasks/{taskId} {
+      allow read, write: if true;
+    }
+    
+    match /budget_items/{itemId} {
+      allow read, write: if true;
+    }
+    
+    match /forms/{formId} {
+      allow read, write: if true;
+    }
+    
+    match /sponsors/{sponsorId} {
+      allow read, write: if true;
+    }
+    
+    match /attendance/{recordId} {
+      allow read, write: if true;
+    }
+    
+    match /fll_progress/{docId} {
+      allow read, write: if true;
+    }
+    
+    match /global_settings/{docId} {
+      allow read, write: if true;
+    }
+    
+    match /robot_status/{docId} {
+      allow read, write: if true;
+    }
+    
+    match /impact_events/{eventId} {
+      allow read, write: if true;
+    }
+    
+    match /judging_feedback/{feedbackId} {
+      allow read, write: if true;
+    }
+    
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
